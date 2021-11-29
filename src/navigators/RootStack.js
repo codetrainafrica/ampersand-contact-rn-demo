@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Welcome from "../screens/Welcome";
 import GetStarted from "../screens/GetStarted";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +25,8 @@ const RootStack = () => {
           component={GetStarted}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   );
