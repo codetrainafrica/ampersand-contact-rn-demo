@@ -6,6 +6,8 @@ import Welcome from "../screens/Welcome";
 import GetStarted from "../screens/GetStarted";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
+import Home from "../screens/Home";
+import QRScanner from "../screens/QRScanner";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +48,10 @@ const RootStack = () => {
           }}
         />
         <Stack.Screen name="Register" component={Register} />
+
+        <Stack.Screen name="Home" component={Home} />
+
+        <Stack.Screen name="QRScanner" component={QRScanner} />
       </Stack.Navigator>
     </NavigationContainer>
   );
