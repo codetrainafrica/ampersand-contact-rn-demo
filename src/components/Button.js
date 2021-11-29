@@ -14,7 +14,8 @@ const Button = ({ text, onPress, containerStyle, textStyle }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    paddingHorizontal: 4,
+    paddingVertical: 8,
     borderBottomColor: "#b46754",
     borderBottomWidth: 2,
   },
