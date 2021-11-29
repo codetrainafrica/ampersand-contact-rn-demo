@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 import Welcome from "../screens/Welcome";
 import GetStarted from "../screens/GetStarted";
 import Login from "../screens/Login";
@@ -11,7 +12,16 @@ const Stack = createStackNavigator();
 const RootStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerBackImage: () => (
+            <Ionicons name="chevron-back-outline" size={30} color="#fff" />
+          ),
+          headerBackTitleVisible: false,
+          headerTintColor: "#fff",
+          headerStyle: { backgroundColor: "#f92b4c" },
+        }}
+      >
         <Stack.Screen
           name="Welcome"
           component={Welcome}
@@ -25,7 +35,13 @@ const RootStack = () => {
           component={GetStarted}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            title: "Sign In",
+          }}
+        />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
