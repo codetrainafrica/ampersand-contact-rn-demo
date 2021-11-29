@@ -18,7 +18,11 @@ const RootStack = () => {
             cardStyle: { backgroundColor: "#f4f5f0" },
           }}
         />
-        <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen
+          name="GetStarted"
+          component={GetStarted}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
