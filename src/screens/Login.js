@@ -8,10 +8,13 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import KeyboardSpacer from "react-native-keyboard-spacer";
+import { useNavigation } from "@react-navigation/native";
+// import KeyboardSpacer from "react-native-keyboard-spacer";
 import Button from "../components/Button";
 
 const Login = () => {
+  const { navigate } = useNavigation();
+
   return (
     <>
       <StatusBar style="light" animated />
@@ -40,7 +43,10 @@ const Login = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.signInBtn}>
+          <TouchableOpacity
+            style={styles.signInBtn}
+            onPress={() => navigate("Home")}
+          >
             <Text style={styles.btnText}>SIGN IN</Text>
           </TouchableOpacity>
 
