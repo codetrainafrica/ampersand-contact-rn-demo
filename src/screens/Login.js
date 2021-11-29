@@ -1,4 +1,5 @@
 import React from "react";
+import { StatusBar } from "expo-status-bar";
 import {
   Image,
   StyleSheet,
@@ -12,43 +13,46 @@ import Button from "../components/Button";
 
 const Login = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/office-couch.jpeg")}
-          style={styles.image}
-        />
-      </View>
-
-      <View style={styles.formContainer}>
-        <View style={styles.inputView}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput placeholder="Enter you email" style={styles.input} />
-        </View>
-
-        <View style={styles.separator} />
-
-        <View style={styles.inputView}>
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            placeholder="Enter your password"
-            style={styles.input}
-            secureTextEntry
+    <>
+      <StatusBar style="light" animated />
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("../../assets/office-couch.jpeg")}
+            style={styles.image}
           />
         </View>
 
-        <TouchableOpacity style={styles.signInBtn}>
-          <Text style={styles.btnText}>SIGN IN</Text>
-        </TouchableOpacity>
+        <View style={styles.formContainer}>
+          <View style={styles.inputView}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput placeholder="Enter you email" style={styles.input} />
+          </View>
 
-        {/* <KeyboardSpacer /> */}
+          <View style={styles.separator} />
 
-        <View style={styles.forgotPasswordView}>
-          <Text style={styles.forgotPassword}>Forgot?</Text>
-          <Button text="Reset Password" />
+          <View style={styles.inputView}>
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              placeholder="Enter your password"
+              style={styles.input}
+              secureTextEntry
+            />
+          </View>
+
+          <TouchableOpacity style={styles.signInBtn}>
+            <Text style={styles.btnText}>SIGN IN</Text>
+          </TouchableOpacity>
+
+          {/* <KeyboardSpacer /> */}
+
+          <View style={styles.forgotPasswordView}>
+            <Text style={styles.forgotPassword}>Forgot?</Text>
+            <Button text="Reset Password" />
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 
