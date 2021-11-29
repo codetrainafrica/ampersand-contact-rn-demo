@@ -1,8 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import GetStartedBtn from "../components/GetStartedBtn";
+import { useNavigation } from "@react-navigation/native";
+import Button from "../components/Button";
 
 const Welcome = () => {
+  const { navigate } = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -16,7 +19,7 @@ const Welcome = () => {
         <Text style={styles.title}>CONTACTS</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <GetStartedBtn />
+        <Button text="GET STARTED" onPress={() => navigate("GetStarted")} />
       </View>
     </View>
   );
