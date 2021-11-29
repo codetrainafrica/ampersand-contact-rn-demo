@@ -5,7 +5,7 @@ import RootStack from "./src/navigators/RootStack";
 const App = () => {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" animated />
       <RootStack />
     </>
   );
