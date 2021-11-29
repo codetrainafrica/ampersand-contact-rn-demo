@@ -30,7 +30,11 @@ const Register = () => {
 
           <View style={styles.inputView}>
             <Text style={styles.label}>Email</Text>
-            <TextInput placeholder="Enter your email" style={styles.input} />
+            <TextInput
+              placeholder="Enter your email"
+              style={styles.input}
+              keyboardType="email-address"
+            />
           </View>
 
           <View style={styles.separator} />
@@ -40,6 +44,7 @@ const Register = () => {
             <TextInput
               placeholder="Enter your phone number"
               style={styles.input}
+              keyboardType="phone-pad"
             />
           </View>
 
@@ -57,6 +62,7 @@ const Register = () => {
             <TextInput
               placeholder="Enter your twitter handle"
               style={styles.input}
+              keyboardType="twitter"
             />
           </View>
 
@@ -67,7 +73,6 @@ const Register = () => {
             <TextInput
               placeholder="Enter your LinkedIn username"
               style={styles.input}
-              secureTextEntry
             />
           </View>
 
