@@ -20,6 +20,9 @@ const RootStack = () => {
           headerBackTitleVisible: false,
           headerTintColor: "#fff",
           headerStyle: { backgroundColor: "#f92b4c" },
+          headerTitleStyle: {
+            letterSpacing: 2,
+          },
         }}
       >
         <Stack.Screen
