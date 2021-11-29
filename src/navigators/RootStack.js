@@ -10,7 +10,14 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: "#f4f5f0" },
+          }}
+        />
         <Stack.Screen name="GetStarted" component={GetStarted} />
       </Stack.Navigator>
     </NavigationContainer>
