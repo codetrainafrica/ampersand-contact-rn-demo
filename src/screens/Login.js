@@ -8,15 +8,19 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { signInUser } from "../actions/authActions";
+import { setAuthenticated, signInUser } from "../actions/authActions";
+import { useDispatch } from "react-redux";
 import Button from "../components/Button";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = () => {
     signInUser(email, password);
+    dispatch(setAuthenticated(true));
   };
 
   return (

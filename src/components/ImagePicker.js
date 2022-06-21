@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ExpoImagePicker from "expo-image-picker";
 
-const ImagePicker = () => {
-  const [image, setImage] = useState(null);
-
+const ImagePicker = ({ image, setImage }) => {
   const pickImage = () => {
     return async () => {
       let result = await ExpoImagePicker.launchImageLibraryAsync({
@@ -14,8 +12,6 @@ const ImagePicker = () => {
         aspect: [4, 3],
         quality: 1,
       });
-
-      console.log(result);
 
       if (!result.cancelled) {
         setImage(result.uri);

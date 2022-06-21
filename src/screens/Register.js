@@ -7,11 +7,15 @@ import {
   View,
   TextInput,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
-import { registerUser } from "../actions/authActions";
+import { registerUser, setAuthenticated } from "../actions/authActions";
+import { useDispatch } from "react-redux";
 import ImagePicker from "../components/ImagePicker";
 
 const Register = () => {
+  const dispatch = useDispatch();
+
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
@@ -19,19 +23,26 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [twitter, setTwitter] = useState("");
   const [linkedin, setLinkedin] = useState("");
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    const userInfo = {
-      fullname,
-      role,
-      phone,
-      twitter,
-      linkedin,
-      email,
-      password,
-    };
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
 
-    registerUser(userInfo);
+      const userInfo = {
+        fullname,
+        role,
+        phone,
+        twitter,
+        linkedin,
+      };
+
+      await registerUser(userInfo, email, password, image);
+      dispatch(setAuthenticated(true));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -39,7 +50,7 @@ const Register = () => {
       <StatusBar style="light" animated />
       <View style={styles.container}>
         <View style={styles.imagePickerContainer}>
-          <ImagePicker />
+          <ImagePicker image={image} setImage={setImage} />
         </View>
         <View style={styles.formContainer}>
           <ScrollView>
@@ -133,8 +144,15 @@ const Register = () => {
           </ScrollView>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.registerBtn} onPress={handleSubmit}>
+          <TouchableOpacity
+            disabled={loading}
+            style={styles.registerBtn}
+            onPress={handleSubmit}
+          >
             <Text style={styles.btnText}>REGISTER</Text>
+            {loading && (
+              <ActivityIndicator color="#fff" style={{ paddingLeft: 8 }} />
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -169,6 +187,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f92b4c",
     marginHorizontal: 8,
     borderRadius: 4,
+    flexDirection: "row",
   },
 
   btnText: {

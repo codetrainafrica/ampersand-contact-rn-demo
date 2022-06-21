@@ -3,7 +3,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, firestore, storage } from "../firebase/config";
+import { ref, uploadBytes } from "firebase/storage";
 
 export const setUser = (user) => {
   return {
@@ -12,10 +14,24 @@ export const setUser = (user) => {
   };
 };
 
-export const registerUser = async (user) => {
+export const setAuthenticated = (authenticated) => {
+  return {
+    type: "SET_AUTHENTICATED",
+    payload: authenticated,
+  };
+};
+
+export const registerUser = async (userInfo, email, password, profileImage) => {
   try {
-    const { email, password } = user;
-    await createUserWithEmailAndPassword(auth, email, password);
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const uid = userCredentials.user.uid;
+    await setDoc(doc(firestore, "users", uid), userInfo);
+    await uploadProfileImage(uid, profileImage);
   } catch (error) {
     console.log(error);
   }
@@ -32,6 +48,29 @@ export const signInUser = async (email, password) => {
 export const signOutUser = async () => {
   try {
     await signOut(auth);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const uploadProfileImage = async (uid, image) => {
+  try {
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        console.log(e);
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", image, true);
+      xhr.send(null);
+    });
+
+    const imagesRef = ref(storage, `images/${uid}`);
+    await uploadBytes(imagesRef, blob);
   } catch (error) {
     console.log(error);
   }

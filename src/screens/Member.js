@@ -3,16 +3,13 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { AntDesign, Entypo, Feather, EvilIcons } from "@expo/vector-icons";
 
 const Member = ({ route }) => {
-  const { fullname, email, phone, role } = route.params.data;
+  const { fullname, email, phone, role, image } = route.params.data;
 
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View style={styles.profileWrapper}>
-          <Image
-            source={require("../../assets/profile-image.jpeg")}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: image }} style={styles.profileImage} />
           <View style={styles.profile}>
             <Text style={styles.profileName}>{fullname}</Text>
             <Text style={styles.profileRole}>{role}</Text>
