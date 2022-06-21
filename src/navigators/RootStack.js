@@ -8,6 +8,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Home from "../screens/Home";
 import QRScanner from "../screens/QRScanner";
+import Member from "../screens/Member";
 
 const Stack = createStackNavigator();
 
@@ -51,7 +52,13 @@ const RootStack = () => {
 
         <Stack.Screen name="Home" component={Home} />
 
-        <Stack.Screen name="QRScanner" component={QRScanner} />
+        <Stack.Screen
+          name="QRScanner"
+          component={QRScanner}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen name="MemberProfile" component={Member} />
       </Stack.Navigator>
     </NavigationContainer>
   );

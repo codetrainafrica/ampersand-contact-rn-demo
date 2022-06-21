@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { QRCode } from "react-native-custom-qr-codes-expo";
+import { useNavigation } from "@react-navigation/native";
+import QRCode from "react-native-qrcode-svg";
+import img from "../../assets/profile-image.jpeg";
 
 const Home = () => {
+  let user = {
+    fullname: "John Doe",
+    email: "john@email.com",
+    phone: "123456789",
+    role: "admin",
+    twitter: "@john",
+    linkedin: "@john",
+  };
+
+  const { navigate } = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 9 }}>
@@ -13,17 +26,17 @@ const Home = () => {
           </Text>
         </View>
         <View style={styles.qrContainer}>
-          <QRCode content="hh" />
+          <QRCode value={JSON.stringify(user)} size={250} />
         </View>
         <View style={styles.profileContainer}>
           <View style={styles.profileWrapper}>
             <Image
-              source={require("../../assets/profile-image.jpeg")}
+              source={{ uri: Image.resolveAssetSource(img).uri }}
               style={styles.profileImage}
             />
             <View style={styles.profile}>
-              <Text style={styles.profileName}>Joan Shay</Text>
-              <Text style={styles.profileRole}>Head of Marketing</Text>
+              <Text style={styles.profileName}>{user.fullname}</Text>
+              <Text style={styles.profileRole}>{user.role}</Text>
             </View>
           </View>
         </View>
@@ -31,7 +44,10 @@ const Home = () => {
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>Want to add a new connetion?</Text>
-        <TouchableOpacity style={styles.scanBtn}>
+        <TouchableOpacity
+          style={styles.scanBtn}
+          onPress={() => navigate("QRScanner")}
+        >
           <Text style={styles.scanBtnText}>Scan QR</Text>
         </TouchableOpacity>
       </View>
