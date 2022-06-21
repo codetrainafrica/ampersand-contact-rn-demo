@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Image,
@@ -8,12 +8,16 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-// import KeyboardSpacer from "react-native-keyboard-spacer";
+import { signInUser } from "../actions/authActions";
 import Button from "../components/Button";
 
 const Login = () => {
-  const { navigate } = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    signInUser(email, password);
+  };
 
   return (
     <>
@@ -29,7 +33,12 @@ const Login = () => {
         <View style={styles.formContainer}>
           <View style={styles.inputView}>
             <Text style={styles.label}>Email</Text>
-            <TextInput placeholder="Enter you email" style={styles.input} />
+            <TextInput
+              placeholder="Enter you email"
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+            />
           </View>
 
           <View style={styles.separator} />
@@ -40,17 +49,14 @@ const Login = () => {
               placeholder="Enter your password"
               style={styles.input}
               secureTextEntry
+              value={password}
+              onChangeText={setPassword}
             />
           </View>
 
-          <TouchableOpacity
-            style={styles.signInBtn}
-            onPress={() => navigate("Home")}
-          >
+          <TouchableOpacity style={styles.signInBtn} onPress={handleSubmit}>
             <Text style={styles.btnText}>SIGN IN</Text>
           </TouchableOpacity>
-
-          {/* <KeyboardSpacer /> */}
 
           <View style={styles.forgotPasswordView}>
             <Text style={styles.forgotPassword}>Forgot?</Text>
