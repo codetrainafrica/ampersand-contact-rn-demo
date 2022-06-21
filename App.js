@@ -1,13 +1,18 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./src/store";
 import RootStack from "./src/navigators/RootStack";
 
 const App = () => {
   return (
-    <>
-      <StatusBar style="auto" animated />
-      <RootStack />
-    </>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <StatusBar style="auto" animated />
+        <RootStack />
+      </PersistGate>
+    </Provider>
   );
 };
 
