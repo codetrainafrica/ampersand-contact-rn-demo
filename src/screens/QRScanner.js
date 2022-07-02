@@ -20,7 +20,7 @@ const QRScanner = () => {
   }, []);
 
   const handleBarCodeScanned = ({ data }) => {
-    navigate("MemberProfile", {
+    navigate("Profile", {
       data: JSON.parse(data),
     });
   };

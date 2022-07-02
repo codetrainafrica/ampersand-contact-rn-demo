@@ -11,7 +11,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Home from "../screens/Home";
 import QRScanner from "../screens/QRScanner";
-import Member from "../screens/Member";
+import Profile from "../screens/Member";
 import { TouchableOpacity, Text, View } from "react-native";
 
 const Stack = createStackNavigator();
@@ -56,11 +56,6 @@ const RootStack = () => {
               name="Home"
               component={Home}
               options={{
-                headerRight: () => (
-                  <TouchableOpacity style={{ paddingHorizontal: 16 }}>
-                    <Ionicons name="person-outline" size={24} color="#fff" />
-                  </TouchableOpacity>
-                ),
                 headerTitle: () => (
                   <View
                     style={{
@@ -94,8 +89,7 @@ const RootStack = () => {
               component={QRScanner}
               options={{ headerShown: false }}
             />
-
-            <Stack.Screen name="MemberProfile" component={Member} />
+            <Stack.Screen name="Profile" component={Profile} />
           </>
         ) : (
           <>

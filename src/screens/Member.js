@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { AntDesign, Entypo, Feather, EvilIcons } from "@expo/vector-icons";
 
-const Member = ({ route }) => {
+const Profile = ({ route }) => {
   const { fullname, email, phone, role, image } = route.params.data;
 
   return (
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Member;
+export default Profile;
