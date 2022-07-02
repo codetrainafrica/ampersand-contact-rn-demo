@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import {
   Image,
   StyleSheet,
@@ -7,20 +7,54 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
+import QRCode from "react-native-qrcode-svg";
+import img from "../../assets/profile-image.jpeg";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../firebase/config";
-import QRCode from "react-native-qrcode-svg";
-import img from "../../assets/profile-image.jpeg";
 import { useSelector } from "react-redux";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase/config";
+import { signOutUser } from "../actions/authActions";
 
 const Home = () => {
   const [user, setUser] = useState(null);
   const [imageUri, setImageUri] = useState("");
 
-  const { uid, email } = useSelector(({ user }) => user);
+  const { setOptions, navigate } = useNavigation();
+  const { uid, email } = useSelector(({ user }) => ({
+    uid: user?.uid,
+    email: user?.email,
+  }));
+
+  useLayoutEffect(() => {
+    setOptions({
+      headerRight: () => (
+        <>
+          {user && (
+            <TouchableOpacity
+              onPress={() =>
+                navigate("Profile", { data: { ...user, image: imageUri } })
+              }
+              style={{ paddingHorizontal: 16 }}
+            >
+              <Ionicons name="person-outline" size={24} color="#fff" />
+            </TouchableOpacity>
+          )}
+        </>
+      ),
+
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={signOutUser}
+          style={{ paddingHorizontal: 16 }}
+        >
+          <Ionicons name="exit-outline" size={24} color="#fff" />
+        </TouchableOpacity>
+      ),
+    });
+  });
 
   const getUserDetails = async () => {
     try {
@@ -41,8 +75,6 @@ const Home = () => {
   useEffect(() => {
     getUserDetails();
   }, []);
-
-  const { navigate } = useNavigation();
 
   return (
     <View style={styles.container}>
